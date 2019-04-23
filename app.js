@@ -30,7 +30,7 @@ new Vue({
 
     methods: {
         submitForm () {
-             
+            this.$v.form.$touch()
             if (!this.$v.form.$invalid) {
                 console.log('📝 Form Submitted', this.form)
             } else {
