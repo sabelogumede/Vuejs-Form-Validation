@@ -21,9 +21,9 @@ new Vue({
                 // min: validators.minLength(3)
             },
             age: {
-                required: validators.required,
-                integer: validators.integer,
-                between: validators.between(21, 120)
+                required: validators.required, //$v.form.age.required
+                integer: validators.integer, //$v.form.age.integer
+                between: validators.between(21, 120) //$v.form.age.between
             }
         }
     },

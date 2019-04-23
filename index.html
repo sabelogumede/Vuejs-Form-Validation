@@ -27,7 +27,9 @@
             <div class="form-group">
                 <label for="age">Age:</label>
                 <input v-model.number="form.age" id="age">
-                <p v-if="$v.form.age.$invalid" class="error-message">The age field is invalid</p>
+                <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
+                <p v-else-if="!$v.form.age.integer" class="error-message">The age field should be an number</p>
+                <p v-else-if="!$v.form.age.between" class="error-message">You should be at least 21 and younger then 120</p>
             </div>
 
             <div>
