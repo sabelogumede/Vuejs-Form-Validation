@@ -1,3 +1,7 @@
+// Tell vue to use the plugin
+Vue.use(vuelidate.default)
+
+
 new Vue({
     el: '#app',
 
@@ -10,27 +14,24 @@ new Vue({
         }
     },
 
-    computed: {
-        nameIsValid () {
-            return !!this.form.name
-            // console.log(nameIsValid)
-        },
-
-        ageIsValid () {
-            return typeof this.form.age === 'number' && this.form.age >= 21 && this.form.age < 120
-            // console.log(ageIsValid)
-        },
-        formIsValid () {
-            return this.nameIsValid && this.ageIsValid
-            // console.log(formIsValid)
+    validations: {
+        form: {
+            name: {
+                required: validators.required
+                // min: validators.minLength(3)
+            },
+            age: {
+                required: validators.required,
+                integer: validators.integer,
+                between: validators.between(21, 120)
+            }
         }
-
     },
 
     methods: {
         submitForm () {
              
-            if (this.formIsValid) {
+            if (!this.$v.form.$invalid) {
                 console.log('📝 Form Submitted', this.form)
             } else {
                 console.log('❌  Invalid form')
