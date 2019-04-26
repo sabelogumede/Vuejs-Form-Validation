@@ -24,11 +24,20 @@ new Vue({
                 required: validators.required, //$v.form.age.required
                 integer: validators.integer, //$v.form.age.integer
                 between: validators.between(21, 120) //$v.form.age.between
+            },
+            email: {
+                email: validators.email
             }
         }
     },
 
     methods: {
+        shouldAppendValidclass (field) {// ex: field = $v.form.email
+            return !field.$invalid && field.$model && field.$dirty
+        },
+        shouldAppendErrorClass (field) {// ex: field = $v.form.email
+            return field.$error
+        },
         submitForm () {
             this.$v.form.$touch()
             if (!this.$v.form.$invalid) {
